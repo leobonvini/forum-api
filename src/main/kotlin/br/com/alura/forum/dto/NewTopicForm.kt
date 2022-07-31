@@ -10,7 +10,8 @@ data class NewTopicForm(
     @field:Size(min = 5, max = 100, message = "Title must have between 5 a 100 characters.")
     val title: String,
 
-    @field:NotEmpty @Size(min = 5, message = "Message must have at least 5 characters.")
+    @field:NotEmpty
+    @field:Size(min = 5, message = "Message must have at least 5 characters.")
     val message: String,
 
     @field:NotNull
