@@ -1,0 +1,1 @@
+UPDATE author SET password = '$2a$12$8x.RMDZxKFtSqTJX5aoaOuxQYHwAMfhCdo6xVJzVb/tuCca8ukBnO' WHERE id = 1;
