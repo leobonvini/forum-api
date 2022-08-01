@@ -1,6 +1,5 @@
 package br.com.alura.forum.service
 
-
 import br.com.alura.forum.dto.NewTopicForm
 import br.com.alura.forum.dto.TopicPerCategory
 import br.com.alura.forum.dto.TopicView
@@ -13,12 +12,12 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 
-
 @Service
-class TopicService(private val repository: TopicRepository,
-                   private val topicViewMapper: TopicViewMapper,
-                   private val topicFormMapper: TopicFormMapper
-                   ){
+class TopicService(
+    private val repository: TopicRepository,
+    private val topicViewMapper: TopicViewMapper,
+    private val topicFormMapper: TopicFormMapper
+) {
 
     private val notFoundMessage: String = "Topic not found!"
 
@@ -39,7 +38,9 @@ class TopicService(private val repository: TopicRepository,
 
     fun searchById(id: Long): TopicView {
         val topic = repository.findById(id)
-            .orElseThrow{NotFoundException(notFoundMessage)}
+            .orElseThrow {
+                NotFoundException(notFoundMessage)
+            }
         return topicViewMapper.map(topic)
     }
 
@@ -50,9 +51,10 @@ class TopicService(private val repository: TopicRepository,
     }
 
     fun update(form: UpdateTopicForm): TopicView {
-
         val topic = repository.findById(form.id)
-            .orElseThrow{NotFoundException(notFoundMessage)}
+            .orElseThrow {
+                NotFoundException(notFoundMessage)
+            }
         topic.title = form.title
         topic.message = form.message
         return topicViewMapper.map(topic)

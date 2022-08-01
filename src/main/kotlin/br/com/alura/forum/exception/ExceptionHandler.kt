@@ -32,7 +32,7 @@ class ExceptionHandler {
         request: HttpServletRequest
     ): ErrorView {
         val errorMessage = HashMap<String, String?>()
-        exception.bindingResult.fieldErrors.forEach{
+        exception.bindingResult.fieldErrors.forEach {
                 e ->
             errorMessage[e.field] = e.defaultMessage
         }

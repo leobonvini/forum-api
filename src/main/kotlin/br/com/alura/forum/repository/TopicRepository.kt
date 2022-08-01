@@ -7,10 +7,13 @@ import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
-interface TopicRepository: JpaRepository<Topic, Long> {
+interface TopicRepository : JpaRepository<Topic, Long> {
 
     fun findByCourseName(nameCourse: String, pagination: Pageable): Page<Topic>
 
-    @Query("SELECT new br.com.alura.forum.dto.TopicPerCategory(course.category, count(t)) FROM Topic t JOIN t.course course GROUP BY course.category")
+    @Query(
+        "SELECT new br.com.alura.forum.dto.TopicPerCategory(course.category, count(t)) " +
+            "FROM Topic t JOIN t.course course GROUP BY course.category"
+    )
     fun report(): List<TopicPerCategory>
 }
