@@ -1,5 +1,6 @@
 package br.com.alura.forum.model
 
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.EnumType
@@ -24,6 +25,7 @@ data class Topic(
     @Enumerated(value = EnumType.STRING)
     val status: StatusTopic = StatusTopic.NOT_RESPONDED,
     @OneToMany(mappedBy = "topic")
-    val responses: List<Response> = ArrayList()
+    val responses: List<Response> = ArrayList(),
+    var alterationDate: LocalDate? = null
 
 )

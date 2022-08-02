@@ -11,6 +11,7 @@ import br.com.alura.forum.repository.TopicRepository
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class TopicService(
@@ -57,6 +58,7 @@ class TopicService(
             }
         topic.title = form.title
         topic.message = form.message
+        topic.alterationDate = LocalDate.now()
         return topicViewMapper.map(topic)
     }
 

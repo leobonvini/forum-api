@@ -1,0 +1,1 @@
+alter table topic add column alteration_date date

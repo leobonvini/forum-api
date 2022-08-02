@@ -1,6 +1,7 @@
 package br.com.alura.forum.dto
 
 import br.com.alura.forum.model.StatusTopic
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class TopicView(
@@ -8,5 +9,6 @@ data class TopicView(
     val title: String,
     val message: String,
     val status: StatusTopic,
-    val creationDate: LocalDateTime
+    val creationDate: LocalDateTime,
+    val alterationDate: LocalDate?
 )

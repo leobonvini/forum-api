@@ -5,6 +5,7 @@ import br.com.alura.forum.model.Topic
 import br.com.alura.forum.service.AuthorService
 import br.com.alura.forum.service.CourseService
 import org.springframework.stereotype.Component
+import java.time.LocalDate
 
 @Component
 class TopicFormMapper(
@@ -17,7 +18,8 @@ class TopicFormMapper(
             title = t.title,
             message = t.message,
             course = courseService.searchById(t.idCourse),
-            author = authorService.searchById(t.idAuthor)
+            author = authorService.searchById(t.idAuthor),
+            alterationDate = LocalDate.now()
         )
     }
 }
