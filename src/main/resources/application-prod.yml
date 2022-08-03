@@ -8,5 +8,19 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   flyway:
     baseline-on-migrate: true
+  mail:
+    host: smtp.mailtrap.io
+    port: 2525
+    username: d7853211c897af
+    password: 23acbd8718f40c
+    properties:
+      mail:
+        transport:
+          protocol: smtp
+        debug: true
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 jwt:
   secret: secret

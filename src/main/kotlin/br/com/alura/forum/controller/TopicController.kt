@@ -34,7 +34,6 @@ import javax.validation.Valid
 class TopicController(private val service: TopicService) {
 
     @GetMapping
-    @Cacheable(value = ["topics"])
     fun list(
         @RequestParam(required = false) nameCourse: String?,
         @PageableDefault(size = 5, sort = ["creationDate"], direction = Sort.Direction.DESC) pagination: Pageable
@@ -49,7 +48,6 @@ class TopicController(private val service: TopicService) {
 
     @PostMapping
     @Transactional
-    @CacheEvict(value = ["topics"], allEntries = true)
     fun create(
         @RequestBody
         @Valid
@@ -63,7 +61,6 @@ class TopicController(private val service: TopicService) {
 
     @PutMapping
     @Transactional
-    @CacheEvict(value = ["topics"], allEntries = true)
     fun update(
         @RequestBody
         @Valid
@@ -76,7 +73,6 @@ class TopicController(private val service: TopicService) {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    @CacheEvict(value = ["topics"], allEntries = true)
     fun delete(@PathVariable id: Long) {
         service.delete(id)
     }

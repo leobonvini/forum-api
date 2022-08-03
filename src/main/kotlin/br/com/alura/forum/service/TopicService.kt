@@ -8,6 +8,8 @@ import br.com.alura.forum.exception.NotFoundException
 import br.com.alura.forum.mapper.TopicFormMapper
 import br.com.alura.forum.mapper.TopicViewMapper
 import br.com.alura.forum.repository.TopicRepository
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -22,8 +24,8 @@ class TopicService(
 
     private val notFoundMessage: String = "Topic not found!"
 
+    @Cacheable(cacheNames = ["Topics"], key = "#root.method.name")
     fun list(
-
         nameCourse: String?,
         pagination: Pageable
     ): Page<TopicView> {
@@ -45,12 +47,14 @@ class TopicService(
         return topicViewMapper.map(topic)
     }
 
+    @CacheEvict(cacheNames = ["Topics"], allEntries = true)
     fun create(form: NewTopicForm): TopicView {
         val topic = topicFormMapper.map(form)
         repository.save(topic)
         return topicViewMapper.map(topic)
     }
 
+    @CacheEvict(cacheNames = ["Topics"], allEntries = true)
     fun update(form: UpdateTopicForm): TopicView {
         val topic = repository.findById(form.id)
             .orElseThrow {
@@ -62,6 +66,7 @@ class TopicService(
         return topicViewMapper.map(topic)
     }
 
+    @CacheEvict(cacheNames = ["Topics"], allEntries = true)
     fun delete(id: Long) {
         repository.deleteById(id)
     }
