@@ -4,6 +4,7 @@ import br.com.alura.forum.security.JWTAuthenticationFilter
 import br.com.alura.forum.security.JWTLoginFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -27,7 +28,10 @@ class SecurityConfiguration(
             .authorizeHttpRequests()
             .antMatchers("/topics").hasAuthority("READ_WRITE")
             .antMatchers("/login").permitAll()
-            .anyRequest().authenticated()
+            .antMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
+            .antMatchers(HttpMethod.GET,"/v3/api-docs/**").permitAll()
+            .anyRequest()
+            .authenticated()
             .and()
             .addFilterBefore(
                 JWTLoginFilter(authManager = configuration.authenticationManager, jwtUtil = jwtUtil),
