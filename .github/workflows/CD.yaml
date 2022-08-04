@@ -38,9 +38,9 @@ jobs:
       - name: Push container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push web -app ${{ secrets.HEROKU_APP_NAME }}
+        run: heroku container:push web -app forum-api-leonardo-bonvini
 
       - name: Release container registry
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release web -app ${{ secrets.HEROKU_APP_NAME }}
+        run: heroku container:release web -app forum-api-leonardo-bonvini
