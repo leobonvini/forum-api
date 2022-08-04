@@ -35,14 +35,10 @@ class TopicController(private val service: TopicService) {
     fun list(
         @RequestParam(required = false) nameCourse: String?,
         @PageableDefault(size = 5, sort = ["creationDate"], direction = Sort.Direction.DESC) pagination: Pageable
-    ): Page<TopicView> {
-        return service.list(nameCourse, pagination)
-    }
+    ) = service.list(nameCourse, pagination)
 
     @GetMapping("/{id}")
-    fun searchById(@PathVariable id: Long): TopicView {
-        return service.searchById(id)
-    }
+    fun searchById(@PathVariable id: Long) = service.searchById(id)
 
     @PostMapping
     @Transactional

@@ -29,11 +29,10 @@ class TopicService(
         nameCourse: String?,
         pagination: Pageable
     ): Page<TopicView> {
-        val topics = if (nameCourse == null) {
-            repository.findAll(pagination)
-        } else {
+        val topics = nameCourse?.let {
             repository.findByCourseName(nameCourse, pagination)
-        }
+        } ?: repository.findAll(pagination)
+
         return topics.map { t ->
             topicViewMapper.map(t)
         }

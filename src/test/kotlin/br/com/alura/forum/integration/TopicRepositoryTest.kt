@@ -1,5 +1,6 @@
 package br.com.alura.forum.integration
 
+import br.com.alura.forum.configuration.DatabaseContainerConfiguration
 import br.com.alura.forum.dto.TopicPerCategory
 import br.com.alura.forum.model.TopicTest
 import br.com.alura.forum.repository.TopicRepository
@@ -15,34 +16,15 @@ import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 
-@DataJpaTest
 @Testcontainers
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-class TopicRepositoryTest {
+class TopicRepositoryTest : DatabaseContainerConfiguration()  {
 
     @Autowired
     private lateinit var topicRepository: TopicRepository
 
     private val pagination = PageRequest.of(0, 5)
     private val topic = TopicTest.build()
-
-    companion object {
-        @Container
-        private val mysqlContainer = MySQLContainer<Nothing>("mysql:latest")
-            .apply {
-                withDatabaseName("testdb")
-                withUsername("leonardo")
-                withPassword("123456")
-            }
-
-        @JvmStatic
-        @DynamicPropertySource
-        fun properties(registry: DynamicPropertyRegistry) {
-            registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl)
-            registry.add("spring.datasource.password", mysqlContainer::getPassword)
-            registry.add("spring.datasource.username", mysqlContainer::getUsername)
-        }
-    }
 
     @Test
     fun mustGenerateAReport() {
