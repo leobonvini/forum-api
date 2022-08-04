@@ -17,5 +17,9 @@ class ResponseController(
 ) {
 
     @PostMapping
-    fun save(@RequestBody @Valid response: Response) = responseService.save(response)
+    fun save(
+        @RequestBody
+        @Valid
+        response: Response
+    ) = responseService.save(response)
 }

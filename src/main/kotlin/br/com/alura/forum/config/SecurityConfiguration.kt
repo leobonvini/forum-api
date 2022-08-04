@@ -28,6 +28,7 @@ class SecurityConfiguration(
             .authorizeHttpRequests()
             .antMatchers("/topics").hasAuthority("READ_WRITE")
             .antMatchers("/responses").hasAuthority("READ_WRITE")
+            .antMatchers("/reports").hasAuthority("ADMIN")
             .antMatchers("/login").permitAll()
             .antMatchers(HttpMethod.POST, "/login").permitAll()
             .antMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
